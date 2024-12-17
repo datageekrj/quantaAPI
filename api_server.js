@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 });
 
 // Example API endpoint
-app.post('/get-problem-statements', async (req, res) => {
+app.post('/getProblems', async (req, res) => {
     const client = new MongoClient(uri);
 
     try {
