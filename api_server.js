@@ -3,7 +3,7 @@ const { MongoClient } = require('mongodb');
 require('dotenv').config(); 
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; 
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
@@ -52,6 +52,6 @@ app.post('/getProblems', async (req, res) => {
 });
 
 // Start the Express server
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Server is running on port ${port}`);
 });
