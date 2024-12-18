@@ -8,7 +8,7 @@ alert("Hey there second time!!");
 
 let ids = ["Catan_Special_Number","Expected_Num_Boxes_with_Coupons", "Test_Problem"];
 
-const dataPromise = fetch(serverLink, "getProblems", {
+const dataPromise = fetch(serverLink + "getProblems", {
     method: 'POST',
     body: JSON.stringify({ids: ids}),
     headers: {'Content-Type': 'application/json'},
