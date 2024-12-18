@@ -4,6 +4,7 @@ let user_id = null;
 let is_user_verified = false;
 
 alert("Hey there");
+alert("Hey there second time!!");
 
 let ids = ["Catan_Special_Number","Expected_Num_Boxes_with_Coupons", "Test_Problem"];
 
