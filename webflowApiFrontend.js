@@ -3,6 +3,8 @@ let chat = null;
 let user_id = null;
 let is_user_verified = false;
 
+alert("Hey there");
+
 let ids = ["Catan_Special_Number","Expected_Num_Boxes_with_Coupons", "Test_Problem"];
 
 const dataPromise = fetch("https://quantaapi-pw5v.onrender.com/getProblems", {
