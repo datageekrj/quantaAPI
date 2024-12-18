@@ -27,6 +27,15 @@ app.use(rateLimit({
     message: "Too many requests from this IP, please try again after 15 minutes"
 }))
 
+const BASE_URL_CSS = 'https://raw.githubusercontent.com/datageekrj/quantaAPI/refs/heads/main/webflowApiFrontend.css';
+const BASE_URL_JS = 'https://raw.githubusercontent.com/datageekrj/quantaAPI/refs/heads/main/webflowApiFrontend.js';
+
+// Middleware to log requests (optional)
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+});
+
 
 async function readGoogleDocTextFile(url) {
     try {
@@ -794,6 +803,32 @@ app.post('/submitFeedback', async (req, res) => {
     }
 });
 
+
+// API route to fetch CSS files
+app.get('/fetch-css', async (req, res) => {
+    try {
+        const response = await axios.get(`${BASE_URL_CSS}`);
+        res.set('Content-Type', 'text/css');
+        res.send(response.data);
+    } catch (error) {
+        console.error('Error fetching CSS file:', error.message);
+        res.status(500).send('Failed to fetch CSS file');
+    }
+});
+
+// API route to fetch JS files
+app.get('/fetch-js', async (req, res) => {
+    try {
+        const response = await axios.get(`${BASE_URL_JS}`);
+        res.set('Content-Type', 'application/javascript');
+        res.send(response.data);
+    } catch (error) {
+        console.error('Error fetching JS file:', error.message);
+        res.status(500).send('Failed to fetch JS file');
+    }
+});
+
+
 async function start_server(){
     quantaFTT = new QuantaFTT(
        process.env.OPENAI_API_KEY,
@@ -814,7 +849,16 @@ async function start_server(){
    app.listen(port, '0.0.0.0', () => {
         console.log(`Server is running on port ${port}`);
    });
+
+    //    http.createServer(app).listen(port, () => {
+    //        console.log('HTTP server running on port' + port);
+    //    });
 }
 
 start_server();
 
+
+// // Start the server
+// app.listen(port, '0.0.0.0', () => {
+//     console.log(`Server is running on port ${port}`);
+// });
