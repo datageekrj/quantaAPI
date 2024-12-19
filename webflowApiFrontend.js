@@ -84,7 +84,7 @@ window.updatePreview = function () {
     const input = document.getElementById("solution-input").value;
     const previewArea = document.getElementById("preview-area");
 
-    let markdown = marked.parse(editor.value);
+    let markdown = marked.parse(input);
     markdown = markdown.replace(/\$\$(.+?)\$\$/g, (match, latex) => {
                 try {
                     return katex.renderToString(latex, { displayMode: true, throwOnError: false });
