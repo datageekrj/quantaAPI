@@ -17,6 +17,9 @@
     animation: slideIn 0.8s ease-in-out forwards; /* Animation to slide in */
 }
 
+
+
+
 @keyframes slideIn {
     from {
         transform: translate(-50%, 100%); /* Start fully off-screen */
@@ -60,18 +63,23 @@
 
 /* Split View Styling */
 .split-view {
-    display: flex;
-    height: 100%;
-    gap: 20px;
+   display: flex;
+   width: 100%;
+   height: 100%;
+   position: relative;
 }
+
 
 /* Left Pane (Textarea) */
 .left-pane {
-    flex: 5; /* 60% */
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
+   background: #f0f0f0;
+   flex: 1;
+   min-width: 200px; /* Minimum width for the left pane */
+   max-width: calc(100% - 300px); /* Max to avoid overlapping the right pane */
+   overflow: auto;
 }
+
+
 
 #solution-input {
     width: 100%;
@@ -86,12 +94,17 @@
 
 /* Right Pane (Preview) */
 .right-pane {
-    flex: 2; /* 40% */
-    background: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    overflow-y: auto;
+    background: #e0e0e0;
+    flex: 1;
+    min-width: 200px; /* Minimum width for the right pane */
+    overflow: auto;
+}
+
+#divider {
+    width: 5px;
+    background: #888;
+    cursor: col-resize;
+    position: relative;
 }
 
 /* Loading and Result Screens */
