@@ -274,13 +274,6 @@ function sendSolution(ev){
 						</div>
                         `
                     }
-                    
-                    html += `
-                    <div class = 'response-header'>
-                        <h3 class="response-field">${key}:</h3>
-                        <p class="response-field">${value}</p>
-                    </div>
-                    `
                 }
                 chat.responseBody.innerHTML = html;
                 showChatPage("responseDIV");
