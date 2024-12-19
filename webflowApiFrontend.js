@@ -101,7 +101,7 @@ function openChat(ev){
         chatWindow = document.createElement("div");
         chatWindow.id = "chatWindow";
         chatWindow.innerHTML = `
-        <span class="close-chat-btn" onclick="closeWindow(event)">✖</span>
+        <span class="close-chat-btn" onclick="closeWindow(event)">x</span>
 
     <div id="inputDiv" class="chat-screen">
         <h6 id="submitHeader">Submit your solution to ${problemName}:</h6>
@@ -254,7 +254,7 @@ function sendSolution(ev){
                         html += `
                         <div class="overall-grade-block">
 								<div class="response-block overall-grade">
-										<h3 class="response-title">${key}</h3>
+										<h3 class="response-title">${key}:</h3>
 										<p class="response-value">${value}</p>
 								</div>
 						</div>
@@ -262,14 +262,14 @@ function sendSolution(ev){
                     } else if (key.toLowerCase().includes("sanity")) {
                         html += `
                         <div class="response-block long">
-								<h3 class="response-title">${key}</h3>
+								<h3 class="response-title">${key}:</h3>
 								<p class="response-field">${value}</p>
 						</div>
                         `
                     } else {
                         html += `
                         <div class="response-block">
-								<h3 class="response-title">${key}</h3>
+								<h3 class="response-title">${key}:</h3>
 								<p class="response-field">${value}</p>
 						</div>
                         `
