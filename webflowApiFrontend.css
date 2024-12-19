@@ -103,7 +103,6 @@
     flex: 1;
     min-width: 200px; /* Minimum width for the right pane */
     overflow: auto;
-    padding: 10px;
 }
 
 #divider {
@@ -116,6 +115,11 @@
 /* Loading and Result Screens */
 #loadingDiv, #responseDIV, #errorDiv {
     display: none;
+}
+
+#submit-btn-container{
+    display: flex;
+    justify-content: center;
 }
 
 /* Submit Button */
