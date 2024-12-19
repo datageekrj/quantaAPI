@@ -117,7 +117,8 @@ function openChat(ev){
             errorP: chatWindow.querySelector("#error-message"),
             thnkFeedback: chatWindow.querySelector("#thnk_feedback"),
             problemID: id,
-            status: "input"
+            status: "input",
+            blurContainer : blurContainer
         }
         showChatPage("inputDiv")
     }
@@ -137,15 +138,6 @@ function openChat(ev){
 }
 
 function closeWindow(ev){
-    const blurContainer = document.getElementById("blurContainer");
-    if (blurContainer) {
-      // Move all child elements of blurContainer back to the body
-      while (blurContainer.firstChild) {
-        document.body.appendChild(blurContainer.firstChild);
-      }
-      // Remove the now-empty blurContainer from the DOM
-      blurContainer.remove();
-    }
     
     if(chat.status == "fetching") chat.controller.abort()
     chat.problemID = null;
