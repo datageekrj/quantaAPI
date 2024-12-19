@@ -146,8 +146,8 @@ function openChat(ev){
         document.body.appendChild(chatWindow);
 
 		const container = chatWindow.querySelector('.split-view');
-		const left = chatWindow.querySelector('.leftpane');
-		const divider = chatWindow.querySelector('divider');
+		const left = chatWindow.querySelector('.left-pane');
+		const divider = chatWindow.querySelector('#divider');
 		const right = chatWindow.querySelector('.right-pane');
 
 		let isDragging = false;
