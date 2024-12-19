@@ -68,6 +68,10 @@ function openChat(ev){
           blurContainer.appendChild(document.body.firstChild);
         }
         document.body.appendChild(blurContainer);
+        setTimeout(() => {
+          blurContainer.classList.add("blurred");
+        }, 100);
+        
         chatWindow = document.createElement("div");
         chatWindow.id = "chatWindow";
         chatWindow.innerHTML = `
