@@ -238,6 +238,8 @@ function closeWindow(ev){
     clearPreviousInput();
     chat.window.style.display = "none";
     overlay.style.display = "none";
+	chat.window.remove();
+	chat = null;
 }
 
 function showChatPage(pageID){
@@ -259,6 +261,21 @@ function showChatPage(pageID){
             el.removeAttribute("disabled")
         }
     }
+
+	if (pageID === "loadingDiv"){
+	    // Step 1: Shrink the chat window
+	    chat.window.style.transform = "none";
+		chat.window.style.animation = 'none';
+		chat.window.style.transition = 'all 0.5s ease'; // Add smooth transition for the changes
+	    chat.window.style.width = 'auto'; // Adjust width as needed
+	    chat.window.style.height = 'auto'; // Adjust height as needed
+		chat.window.style.maxHeight = "100vh";
+		chat.window.style.maxWidth = "600px";
+		chat.window.style.bottom = "20px";
+		chat.window.style.right = "20px";
+		
+		
+	}
     chat.window.querySelector(`#${pageID}`).style.display = 'block';
 }
 
