@@ -98,7 +98,6 @@ function openChat(ev){
     let problemName = id.replace(/_/g, ' ');
     if(!chat) {
         overlay.style.display = "block";
-        chatWindow.style.display = "block";
         chatWindow = document.createElement("div");
         chatWindow.id = "chatWindow";
         chatWindow.innerHTML = `
@@ -181,7 +180,7 @@ function closeWindow(ev){
     chat.window.style.display = "none";
     chat.status = "closed";
     clearPreviousInput();
-    chatWindow.style.display = "none";
+    chat.window.style.display = "none";
     overlay.style.display = "none";
 }
 
