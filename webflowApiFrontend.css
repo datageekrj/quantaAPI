@@ -219,3 +219,37 @@
     line-height: 100%;
     padding-right: 5px;
 }
+
+/* Ensure a consistent font size and alignment for LaTeX-rendered math */
+.latex-math {
+    font-family: 'Times New Roman', Times, serif; /* Professional serif font */
+    font-size: 1.2em; /* Slightly larger font for readability */
+    line-height: 1.4; /* Adequate spacing */
+    color: #333; /* Neutral dark gray for contrast */
+    text-align: left; /* Align math to the left */
+    margin: 0.5em 0; /* Space around math blocks */
+}
+
+/* Inline math styling */
+.latex-math-inline {
+    display: inline;
+    vertical-align: middle;
+    padding: 0 0.2em; /* Add some padding for breathing room */
+}
+
+/* Block math styling */
+.latex-math-block {
+    display: block;
+    text-align: center;
+    margin: 1em 0; /* More spacing for standalone expressions */
+    background-color: #f9f9f9; /* Subtle background highlight */
+    padding: 1em;
+    border-radius: 5px; /* Smooth edges */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Highlight specific elements (e.g., fractions, exponents) */
+.latex-math em {
+    color: #0056b3; /* Subtle highlight for emphasis */
+}
+
