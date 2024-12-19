@@ -69,6 +69,11 @@
    position: relative;
 }
 
+#inputDiv{
+    height: 80%;
+    max-height: 80%;
+}
+
 
 /* Left Pane (Textarea) */
 .left-pane {
@@ -265,4 +270,3 @@
 .latex-math em {
     color: #0056b3; /* Subtle highlight for emphasis */
 }
-
