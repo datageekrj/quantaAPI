@@ -3,8 +3,7 @@ let chat = null;
 let user_id = null;
 let is_user_verified = false;
 let overlay = document.createElement("div");
-overlay.id = "chatOverlay";
-document.body.appendChild(overlay);
+
 
 
 let ids = ["Catan_Special_Number","Expected_Num_Boxes_with_Coupons", "Test_Problem"];
@@ -40,6 +39,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const data = await dataPromise
     if(!data) return
+
+    overlay.id = "chatOverlay";
+    document.body.appendChild(overlay);
 
     document.querySelectorAll('.insert-problem').forEach((el) =>{
         let id = el.innerText.replace(/\s+/g, '');
