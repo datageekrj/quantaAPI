@@ -13,7 +13,6 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     overflow-y: auto;
     z-index: 1001;
-    display: flex;
     flex-direction: column;
     animation: slideIn 0.8s ease-in-out forwards; /* Animation to slide in */
 }
@@ -143,7 +142,7 @@
 
 
 #responseBody {
-    width: 600px;
+    width: 100%;
     background: #f9f9f9;
     border: 1px solid #dcdcdc;
     border-radius: 10px;
@@ -152,6 +151,7 @@
     margin: auto;
     font-family: Arial, sans-serif;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
 }
 
 .response-field {
@@ -163,6 +163,8 @@
 .response-header p {
     margin: 0;
     font-size: 14px;
+    width: 60%;
     font-weight: 400;
     color: #666;
 }
+
