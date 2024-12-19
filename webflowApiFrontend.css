@@ -1,4 +1,10 @@
-
+#blurContainer {
+    filter: none;
+    transition: filter 0.5s ease;
+}
+#blurContainer.blurred {
+    filter: blur(5px);
+}
 #chatWindow {
     position: fixed;
     bottom: 20px;
