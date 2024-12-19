@@ -66,20 +66,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     })
 })
-
 window.updatePreview = function () {
     const input = document.getElementById("solution-input").value;
     const previewArea = document.getElementById("preview-area");
 
-    // Render LaTeX and plain text
-    const renderedText = input.replace(/\\\((.*?)\\\)/g, (_, latex) => {
-        return `<span class="latex">${latex}</span>`;
-    });
+    // Insert raw input directly into the preview area with styling class
+    previewArea.innerHTML = `<span class="latex-math">${input}</span>`;
 
-    // Update the preview area
-    previewArea.innerHTML = renderedText;
-
-    // If MathJax is available, re-render for LaTeX
+    // Trigger MathJax to typeset the new content
     if (typeof MathJax !== "undefined" && MathJax.typeset) {
         MathJax.typeset([previewArea]);
     }
