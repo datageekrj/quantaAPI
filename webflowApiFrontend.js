@@ -79,6 +79,14 @@ window.updatePreview = function () {
     }
 };
 
+window.clearPreviousInput = function() {
+    const textArea = document.getElementById("solution-input");
+    const previewArea = document.getElementById("preview-area");
+
+    textArea.value = "";
+    previewArea.innerHTML = "Your preview will appear here...";
+}
+
 function openChat(ev){
     let id = ev.target.getAttribute("data-id");
     let problemName = id.replace(/_/g, ' ');
@@ -149,6 +157,7 @@ function openChat(ev){
             return;
         }
       */
+        clearPreviousInput();
         if(chat.status == "fetching") chat.controller.abort()
         chat.submitHeader.innerHTML = `Submit your solution to ${problemName}:`;
         showChatPage("inputDiv");
@@ -163,6 +172,7 @@ function closeWindow(ev){
     chat.problemID = null;
     chat.window.style.display = "none";
     chat.status = "closed";
+    clearPreviousInput();
 }
 
 function showChatPage(pageID){
