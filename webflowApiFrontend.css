@@ -103,6 +103,7 @@
     flex: 1;
     min-width: 200px; /* Minimum width for the right pane */
     overflow: auto;
+    padding: 10px;
 }
 
 #divider {
