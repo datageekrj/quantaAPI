@@ -56,22 +56,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     })
 })
 
+window.updatePreview = function () {
+    const input = document.getElementById("solution-input").value;
+    const previewArea = document.getElementById("preview-area");
+
+    // Render LaTeX and plain text
+    const renderedText = input.replace(/\\\((.*?)\\\)/g, (_, latex) => {
+        return `<span class="latex">${latex}</span>`;
+    });
+
+    // Update the preview area
+    previewArea.innerHTML = renderedText;
+
+    // If MathJax is available, re-render for LaTeX
+    if (typeof MathJax !== "undefined" && MathJax.typeset) {
+        MathJax.typeset([previewArea]);
+    }
+};
 
 function openChat(ev){
     let id = ev.target.getAttribute("data-id");
     let problemName = id.replace(/_/g, ' ');
     if(!chat) {
-
-        const blurContainer = document.createElement("div");
-        blurContainer.id = "blurContainer";
-        while (document.body.firstChild) {
-          blurContainer.appendChild(document.body.firstChild);
-        }
-        document.body.appendChild(blurContainer);
-        setTimeout(() => {
-          blurContainer.classList.add("blurred");
-        }, 100);
-        
         chatWindow = document.createElement("div");
         chatWindow.id = "chatWindow";
         chatWindow.innerHTML = `
@@ -79,7 +85,17 @@ function openChat(ev){
 
     <div id="inputDiv" class="chat-screen">
         <h6 id="submitHeader">Submit your solution to ${problemName}:</h6>
-        <textarea id="solution-input" onkeydown="handleKeydown(event)" placeholder="Submit your solution..."></textarea>
+        <div class="split-view">
+            <!-- Left Pane: Input Area -->
+            <div class="left-pane">
+                <textarea id="solution-input" oninput="updatePreview()" placeholder="Write your text or LaTeX here..."></textarea>
+            </div>
+
+            <!-- Right Pane: Preview Area -->
+            <div class="right-pane">
+                <div id="preview-area">Your preview will appear here...</div>
+            </div>
+        </div>
         <button id="submit-btn" class="btn" onclick="sendSolution(event)">Send</button>
     </div>
 
@@ -117,8 +133,7 @@ function openChat(ev){
             errorP: chatWindow.querySelector("#error-message"),
             thnkFeedback: chatWindow.querySelector("#thnk_feedback"),
             problemID: id,
-            status: "input",
-            blurContainer : blurContainer
+            status: "input"
         }
         showChatPage("inputDiv")
     }
@@ -137,8 +152,8 @@ function openChat(ev){
     }
 }
 
+
 function closeWindow(ev){
-    
     if(chat.status == "fetching") chat.controller.abort()
     chat.problemID = null;
     chat.window.style.display = "none";
