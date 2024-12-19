@@ -17,9 +17,6 @@
     animation: slideIn 0.8s ease-in-out forwards; /* Animation to slide in */
 }
 
-
-
-
 @keyframes slideIn {
     from {
         transform: translate(-50%, 100%); /* Start fully off-screen */
@@ -174,7 +171,6 @@
 
 
 #responseBody {
-    max-width: 600px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
