@@ -21,6 +21,11 @@ const dataPromise = fetch(serverLink + "getProblems", {
     console.error(error);
 })
 
+const script = document.createElement("script");
+script.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js";
+script.async = true;
+document.head.appendChild(script);
+
 document.addEventListener('DOMContentLoaded', async () => {
     window.$memberstackDom.getCurrentMember().then(response => {
         if(response){
