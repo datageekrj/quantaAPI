@@ -112,6 +112,8 @@ function openChat(ev){
                 <textarea id="solution-input" oninput="updatePreview()" placeholder="Write your text or LaTeX here..."></textarea>
             </div>
 
+			<div id = "divider"></div>
+
             <!-- Right Pane: Preview Area -->
             <div class="right-pane">
                 <div id="preview-area">Your preview will appear here...</div>
@@ -142,6 +144,41 @@ function openChat(ev){
     </div>
     `;
         document.body.appendChild(chatWindow);
+
+		const container = chatWindow.querySelector('.split-view');
+		const left = chatWindow.querySelector('.leftpane');
+		const divider = chatWindow.querySelector('divider');
+		const right = chatWindow.querySelector('.right-pane');
+
+		let isDragging = false;
+
+		divider.addEventListener('mousedown', (e) => {
+			isDragging = true;
+			document.body.style.cursor = 'col-resize'; // Change cursor during drag
+		});
+
+		document.addEventListener('mousemove', (e) => {
+			if (!isDragging) return;
+		
+			// Calculate new widths based on mouse position
+			const containerRect = container.getBoundingClientRect();
+			const newLeftWidth = e.clientX - containerRect.left;
+		
+			// Set boundaries
+			const minLeftWidth = 200; // Minimum width for the left pane
+			const maxLeftWidth = containerRect.width - 200; // Minimum width for the right pane
+		
+			if (newLeftWidth >= minLeftWidth && newLeftWidth <= maxLeftWidth) {
+				left.style.flex = `0 0 ${newLeftWidth}px`;
+				right.style.flex = `1 1 ${containerRect.width - newLeftWidth - 5}px`; // Adjust right pane width
+			}
+		});
+
+		document.addEventListener('mouseup', () => {
+			isDragging = false;
+			document.body.style.cursor = ''; // Reset cursor
+		});
+		
         chat = {
             window: chatWindow,
             input: chatWindow.querySelector("#solution-input"),
