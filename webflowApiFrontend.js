@@ -248,8 +248,9 @@ function sendSolution(ev){
                 if(!data.response) return
                 let html = ``
                 for(let [key, value] of Object.entries(data.response)) {
+                    key = key.replace(/_/g, ' ');
                     html += `
-                    <div>
+                    <div class = 'response-header'>
                         <h3 class="response-field">${key}:</h3>
                         <p class="response-field">${value}</p>
                     </div>
