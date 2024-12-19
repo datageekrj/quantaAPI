@@ -128,15 +128,16 @@
 #submit-btn {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #374b6a;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 #submit-btn:hover {
-    background-color: #0056b3;
+    background-color:#325997;
 }
 
 #feedback-buttons {
