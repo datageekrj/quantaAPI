@@ -123,3 +123,37 @@
     cursor: pointer;
     transform: scale(1.3);
 }
+
+.response-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #dcdcdc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+
+#responseBody {
+    width: 600px;
+    background: #f9f9f9;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    margin: auto;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.response-field {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.response-header p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
+}
