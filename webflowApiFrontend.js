@@ -69,6 +69,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 window.updatePreview = function () {
     const input = document.getElementById("solution-input").value;
     const previewArea = document.getElementById("preview-area");
+
+    window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+     };
+
     // Insert raw input directly into the preview area with styling class
     previewArea.innerHTML = `<span class="latex-math">${input}</span>`;
 
@@ -111,7 +119,10 @@ function openChat(ev){
                 <div id="preview-area">Your preview will appear here...</div>
             </div>
         </div>
-        <button id="submit-btn" class="btn" onclick="sendSolution(event)">Send</button>
+		<div id = "submit-btn-container">
+	        <button id="submit-btn" class="btn" onclick="sendSolution(event)">Send</button>
+			
+		</div>
     </div>
 
     <!-- Loading Screen -->
