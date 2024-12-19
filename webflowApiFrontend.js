@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         el.innerHTML = `
                 <p class="edu-problem-name-and-num">${problemName}</p>
                 <p class="edu-p">${data[id]}</p>
-                <img src="${img_src}" class="sbmt-button" data-id="${id}" onclick="openChat(event)">
+                <div class = ".sbmt-button-container"><img src="${img_src}" class="sbmt-button" data-id="${id}" onclick="openChat(event)"></div>
                 `
         try {
             MathJax.startup.promise.then(() => {
@@ -249,6 +249,32 @@ function sendSolution(ev){
                 let html = ``
                 for(let [key, value] of Object.entries(data.response)) {
                     key = key.replace(/_/g, ' ');
+
+                    if (key.toLowerCase() === "overall grade"){
+                        html += `
+                        <div class="overall-grade-block">
+								<div class="response-block overall-grade">
+										<h3 class="response-title">${key}</h3>
+										<p class="response-value">${value}</p>
+								</div>
+						</div>
+                        `
+                    } else if (key.toLowerCase().includes("sanity")) {
+                        html += `
+                        <div class="response-block long">
+								<h3 class="response-title">${key}</h3>
+								<p class="response-field">${value}</p>
+						</div>
+                        `
+                    } else {
+                        html += `
+                        <div class="response-block">
+								<h3 class="response-title">${key}</h3>
+								<p class="response-field">${value}</p>
+						</div>
+                        `
+                    }
+                    
                     html += `
                     <div class = 'response-header'>
                         <h3 class="response-field">${key}:</h3>
