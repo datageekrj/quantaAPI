@@ -2,6 +2,10 @@ const serverLink = 'https://quantaapi-pw5v.onrender.com/';
 let chat = null;
 let user_id = null;
 let is_user_verified = false;
+let overlay = document.createElement("div");
+overlay.id = "chatOverlay";
+document.body.appendChild(overlay);
+
 
 let ids = ["Catan_Special_Number","Expected_Num_Boxes_with_Coupons", "Test_Problem"];
 
@@ -91,6 +95,8 @@ function openChat(ev){
     let id = ev.target.getAttribute("data-id");
     let problemName = id.replace(/_/g, ' ');
     if(!chat) {
+        overlay.style.display = "block";
+        chatWindow.style.display = "block";
         chatWindow = document.createElement("div");
         chatWindow.id = "chatWindow";
         chatWindow.innerHTML = `
@@ -173,6 +179,8 @@ function closeWindow(ev){
     chat.window.style.display = "none";
     chat.status = "closed";
     clearPreviousInput();
+    chatWindow.style.display = "none";
+    overlay.style.display = "none";
 }
 
 function showChatPage(pageID){
