@@ -159,12 +159,11 @@ function openChat(ev){
         showChatPage("inputDiv")
     }
     else{
-    /*
         if(!is_user_verified){
             showError("Only registered, and verified users can send solutions. Login and verify your email to continue")
             return;
         }
-      */
+	overlay.style.display = "block";
         clearPreviousInput();
         if(chat.status == "fetching") chat.controller.abort()
         chat.submitHeader.innerHTML = `Submit your solution to ${problemName}:`;
