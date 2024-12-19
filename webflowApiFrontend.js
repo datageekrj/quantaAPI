@@ -61,6 +61,13 @@ function openChat(ev){
     let id = ev.target.getAttribute("data-id");
     let problemName = id.replace(/_/g, ' ');
     if(!chat) {
+
+        const blurContainer = document.createElement("div");
+        blurContainer.id = "blurContainer";
+        while (document.body.firstChild) {
+          blurContainer.appendChild(document.body.firstChild);
+        }
+        document.body.appendChild(blurContainer);
         chatWindow = document.createElement("div");
         chatWindow.id = "chatWindow";
         chatWindow.innerHTML = `
