@@ -121,7 +121,7 @@ function openChat(ev){
         <span class="close-chat-btn" onclick="closeWindow(event)">x</span>
 
     <div id="inputDiv" class="chat-screen">
-        <h6 id="submitHeader">Submit your solution to ${problemName}: (Drag the middle vertical line to resize the width)</h6>
+        <h6 id="submitHeader">Submit your solution to ${problemName}: </h6>
         <div class="split-view">
             <!-- Left Pane: Input Area -->
             <div class="left-pane">
