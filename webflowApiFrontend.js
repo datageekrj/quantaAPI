@@ -119,14 +119,7 @@ function openChat(ev){
         <span class="close-chat-btn" onclick="closeWindow(event)">&times;</span>
 
     <div id="inputDiv" class="chat-screen">
-        <h6 id="submitHeader">Submit your solution to ${problemName}: 
-		<div id = "toggleHeight">
-			<button class = "toggle">20%</button>
-			<button class = "toggle">40%</button>
-			<button class = "toggle">60%</button>
-			<button class = "toggle">80%</button>
-			<button class = "toggle">100%</button>
-		</div></h6>
+        <h6 id="submitHeader">Submit your solution to ${problemName}: </h6>
         <div class="split-view">
             <!-- Left Pane: Input Area -->
             <div class="left-pane">
@@ -173,13 +166,6 @@ function openChat(ev){
 		const left = chatWindow.querySelector('.left-pane');
 		const divider = chatWindow.querySelector('#divider');
 		const right = chatWindow.querySelector('.right-pane');
-		const toggleButtons = chatWindow.querySelector('#toggleHeight').querySelectorAll("button");
-
-		toggleButtons.forEach((btn) => {
-			btn.addEventListener('click', () => {
-			    chatWindow.style.height = `${btn.innerText.replace("%", "")}vh`;
-			});
-		})
 		let isDragging = false;
 
 		divider.addEventListener('mousedown', (e) => {
