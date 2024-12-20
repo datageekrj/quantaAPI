@@ -330,44 +330,46 @@ function sendSolution(ev){
         })
         .then(data => {
                 if(!data.response) return
-                let html = ``
-                for(let [key, value] of Object.entries(data.response)) {
-                    key = key.replace(/_/g, ' ');
+                let html = "";
 
-                    if (key.toLowerCase() === "overall grade"){
-                        html += `
-                        <div class="overall-grade-block">
-								<div class="response-block overall-grade">
-										<h3 class="response-title">${key}:</h3>
-										<p class="response-value">${value}</p>
-								</div>
-						</div>
-                        `
-                    } else if (key.toLowerCase()=== "sanity status"){
-						html += `
-                        <div class="response-block">
-								<h3 class="response-title">${key}:</h3>
-								<p class="response-field">${value}</p>
-						</div>
-                        `
-					} 
-					
-					else if (key.toLowerCase().includes("sanity")) {
-                        html += `
-                        <div class="response-block long">
-								<h3 class="response-title">${key}:</h3>
-								<p class="response-field">${value}</p>
-						</div>
-                        `
-                    } else {
-                        html += `
-                        <div class="response-block">
-								<h3 class="response-title">${key}:</h3>
-								<p class="response-field">${value}</p>
-						</div>
-                        `
-                    }
-                }
+		// Ensure "Overall Grade" is handled first
+		if (data.response["overall_grade"]) {
+		    let key = "Overall Grade";
+		    let value = data.response["overall_grade"];
+		    html += `
+		        <div class="overall-grade-block">
+		            <div class="response-block overall-grade">
+		                <h3 class="response-title">${key}:</h3>
+		                <p class="response-value">${value}</p>
+		            </div>
+		        </div>
+		    `;
+		}
+		
+		// Iterate through other entries
+		for (let [key, value] of Object.entries(data.response)) {
+		    key = key.replace(/_/g, ' ');
+		
+		    // Skip "Overall Grade" as it was already handled
+		    if (key.toLowerCase() === "overall grade") continue;
+		
+		    if (value.length > 30) {
+		        html += `
+		            <div class="response-block long">
+		                <h3 class="response-title">${key}:</h3>
+		                <p class="response-field">${value}</p>
+		            </div>
+		        `;
+		    } else {
+		        html += `
+		            <div class="response-block">
+		                <h3 class="response-title">${key}:</h3>
+		                <p class="response-field">${value}</p>
+		            </div>
+		        `;
+		    }
+		}
+
                 chat.responseBody.innerHTML = html;
                 showChatPage("responseDIV");
                 chat.responseID = data.submission_id;
