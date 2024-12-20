@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         el.innerHTML = `
                 <p class="edu-problem-name-and-num">${problemName}</p>
                 <p class="edu-p">${data[id]}</p>
-                <div class = "sbmt-button-container"><img src="${img_src}" class="sbmt-button" data-id="${id}" onclick="openChat(event)"></div>
+                <div class = "sbmt-button-container" onclick="openChat(event)"><img src="${img_src}" class="sbmt-button" data-id="${id}" ></div>
                 `
         try {
             MathJax.startup.promise.then(() => {
