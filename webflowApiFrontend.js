@@ -319,9 +319,9 @@ function sendSolution(ev){
                 let html = "";
 
 		// Ensure "Overall Grade" is handled first
-		if (data.response["overall_grade"]) {
+		if (data.response["Overall_Grade"]) {
 		    let key = "Overall Grade";
-		    let value = data.response["overall_grade"];
+		    let value = data.response["Overall_Grade"];
 		    html += `
 		        <div class="overall-grade-block">
 		            <div class="response-block overall-grade">
