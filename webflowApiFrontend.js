@@ -266,7 +266,7 @@ function showChatPage(pageID){
 		chat.window.style.transition = 'all 0.5s ease'; // Add smooth transition for the changes
 	    chat.window.style.width = 'auto'; // Adjust width as needed
 	    chat.window.style.height = 'auto'; // Adjust height as needed
-		chat.window.style.maxHeight = "100vh";
+		chat.window.style.maxHeight = "70vh";
 		chat.window.style.maxWidth = "600px";
 		chat.window.style.bottom = "20px";
 		chat.window.style.right = "20px";
