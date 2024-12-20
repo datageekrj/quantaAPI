@@ -168,7 +168,7 @@ function openChat(ev){
 		const left = chatWindow.querySelector('.left-pane');
 		const divider = chatWindow.querySelector('#divider');
 		const right = chatWindow.querySelector('.right-pane');
-		const toggleButton = chatWindow.getElementById('toggleHeight');
+		const toggleButton = chatWindow.querySelector('#toggleHeight');
 
 		let isExpanded = false;
 
