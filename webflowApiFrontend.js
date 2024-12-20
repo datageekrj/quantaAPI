@@ -260,18 +260,10 @@ function showChatPage(pageID){
     }
 
 	if (pageID === "loadingDiv"){
-	    // Step 1: Shrink the chat window
-	    chat.window.style.transform = "none";
-		chat.window.style.animation = 'none';
-		chat.window.style.transition = 'all 0.5s ease'; // Add smooth transition for the changes
-	    chat.window.style.width = 'auto'; // Adjust width as needed
-	    chat.window.style.height = 'auto'; // Adjust height as needed
-		chat.window.style.maxHeight = "70vh";
-		chat.window.style.maxWidth = "600px";
-		chat.window.style.bottom = "20px";
-		chat.window.style.right = "20px";
-		
-		
+		chat.window.style.animation = 'slideRight 0.8s ease-in-out forwards';
+	    chat.window.style.maxWidth = '600px';
+		chat.window.style.maxHeight = '70vh';
+		chat.window.style.height = 'auto';
 	}
     chat.window.querySelector(`#${pageID}`).style.display = 'block';
 }
