@@ -198,9 +198,8 @@
 }
 
 .response-field {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
+    font-size: 1.1rem;
+    font-family: Cmu, Arial, sans-serif;
 }
 
 .response-header p {
@@ -223,6 +222,11 @@
     justify-content: center;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#thumb-up-btn:hover, #thumb-down-btn:hover{
+    transform: scale(1.1);
+    background-color: rgba(152,152,152, 0.1);
 }
 
 .overall-grade-block {
