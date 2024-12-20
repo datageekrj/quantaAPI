@@ -15,7 +15,6 @@
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    overflow-y: auto;
     z-index: 1001;
     flex-direction: column;
     animation: slideIn 0.8s ease-in-out forwards; /* Animation to slide in */
