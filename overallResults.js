@@ -174,9 +174,9 @@ function renderDetails(data){
     }
 	let html = "";
 	// Ensure "Overall Grade" is handled first
-	if (data.all_response["overall_grade"]) {
+	if (data.all_response["Overall_Grade"]) {
 	    let key = "Overall Grade";
-	    let value = data.all_response["overall_grade"];
+	    let value = data.all_response["Overall_Grade"];
 	    html += `
 	        <div class="overall-grade-block">
 	            <div class="response-block overall-grade">
