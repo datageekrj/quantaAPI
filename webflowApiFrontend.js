@@ -350,7 +350,16 @@ function sendSolution(ev){
 								</div>
 						</div>
                         `
-                    } else if (key.toLowerCase().includes("sanity")) {
+                    } else if (key.toLowerCase()=== "sanity status"){
+						html += `
+                        <div class="response-block">
+								<h3 class="response-title">${key}:</h3>
+								<p class="response-field">${value}</p>
+						</div>
+                        `
+					} 
+					
+					else if (key.toLowerCase().includes("sanity")) {
                         html += `
                         <div class="response-block long">
 								<h3 class="response-title">${key}:</h3>
