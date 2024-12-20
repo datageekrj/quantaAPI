@@ -30,6 +30,10 @@ app.use(rateLimit({
 const BASE_URL_CSS = 'https://raw.githubusercontent.com/datageekrj/quantaAPI/refs/heads/main/webflowApiFrontend.css';
 const BASE_URL_JS = 'https://raw.githubusercontent.com/datageekrj/quantaAPI/refs/heads/main/webflowApiFrontend.js';
 
+const BASE_URL_CSS_PROFILE = 'https://raw.githubusercontent.com/datageekrj/quantaAPI/refs/heads/main/overallResults.css';
+const BASE_URL_JS_PROFILE = 'https://raw.githubusercontent.com/datageekrj/quantaAPI/refs/heads/main/overallResults.js';
+
+
 // Middleware to log requests (optional)
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
@@ -827,6 +831,31 @@ app.get('/fetch-js', async (req, res) => {
         res.status(500).send('Failed to fetch JS file');
     }
 });
+
+// API route to fetch CSS files
+app.get('/fetch-css-profile', async (req, res) => {
+    try {
+        const response = await axios.get(`${BASE_URL_CSS_PROFILE}`);
+        res.set('Content-Type', 'text/css');
+        res.send(response.data);
+    } catch (error) {
+        console.error('Error fetching CSS file:', error.message);
+        res.status(500).send('Failed to fetch CSS file');
+    }
+});
+
+// API route to fetch JS files
+app.get('/fetch-js-profile', async (req, res) => {
+    try {
+        const response = await axios.get(`${BASE_URL_JS_PROFILE}`);
+        res.set('Content-Type', 'application/javascript');
+        res.send(response.data);
+    } catch (error) {
+        console.error('Error fetching JS file:', error.message);
+        res.status(500).send('Failed to fetch JS file');
+    }
+});
+
 
 
 async function start_server(){
