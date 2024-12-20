@@ -23,7 +23,7 @@
     transition: height 0.3s ease; 
 }
 
-#toggleHeight {
+#toggleHeight button {
     background-color: var(--primary-color);
     color: white;
     border: none;
@@ -32,8 +32,13 @@
     cursor: pointer;
 }
 
-#toggleHeight:hover {
+#toggleHeight button:hover {
     background-color: var(--primary-color-hover);
+}
+
+#submitHeader{
+    display: flex;
+    justify-content: space-around;
 }
 
 @keyframes slideIn {
