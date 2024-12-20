@@ -6,8 +6,6 @@ let overlay = document.createElement("div");
 
 
 
-let ids = ["Catan_Special_Number","Expected_Num_Boxes_with_Coupons", "Test_Problem"];
-
 const dataPromise = fetch(serverLink + "getProblems", {
     method: 'POST',
     body: JSON.stringify({ids: ids}),
