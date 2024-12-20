@@ -68,8 +68,8 @@
 /* Close Button */
 .close-chat-btn {
     position: absolute;
-    top: 2px;
-    right: 2px;
+    top: 5px;
+    right: 12px;
     background-color: transparent;
     border: none;
     font-size: 16px;
