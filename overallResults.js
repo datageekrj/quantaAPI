@@ -72,7 +72,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             for(let result of results) {
                 row_html += `<a onclick="showSubmission(event)" data-id="${result.id}">${result.overall_grade}</a>`
             }
-            let problemName = id.replace(/_/g, ' ');
+	    if (ids.includes(id)){
+		let problemName = id.replace(/_/g, ' ');
             body_html += `
                         <tr>
                             <td>${problemName}</td>
@@ -83,6 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             </td>
                         </tr>
             `;
+	    }   
         }
         body.innerHTML = body_html;
 
