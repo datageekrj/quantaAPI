@@ -8,7 +8,6 @@
     position: fixed;
     bottom: 0; /* Start at the bottom of the screen */
     left: 50%;
-    transform: translate(-50%, 100%); /* Initially hidden below the viewport */
     width: 100%;
     max-width: 100%;
     height: 60vh;
@@ -50,6 +49,18 @@
     }
     to {
         transform: translate(-50%, 0); /* End in the visible viewport */
+    }
+}
+@keyframes slideRight {
+    from {
+        transform: translate(-50%, 0); /* Centered horizontally */
+        left: 50%; /* Starting from center */
+    }
+    to {
+        transform: translate(0, 0); /* No offset */
+        left: auto; /* Reset left */
+        right: 20px; /* Align to the right */
+        bottom: 20px; /* Align to the bottom */
     }
 }
 
@@ -328,4 +339,16 @@
 @keyframes spin {
     from {transform: rotate(0deg);}
     to {transform: rotate(360deg);}
+}
+
+#thnk_feedback{
+    padding-top: 13px;
+}
+
+.close-chat-btn{
+    transition: transform 0.5s ease;
+}
+
+.close-chat-btn:hover{
+    transform: scale(1.2);
 }
