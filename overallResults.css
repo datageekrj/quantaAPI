@@ -175,3 +175,7 @@ p {
     line-height: 100%;
     padding-right: 5px;
 }
+
+.response-block .long .input{
+    font-size: 20px;
+}
