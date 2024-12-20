@@ -145,7 +145,7 @@ function renderDetails(data){
         return
     }
     let html = ``
-                for(let [key, value] of Object.entries(data.response)) {
+                for(let [key, value] of Object.entries(data.all_response)) {
                     key = key.replace(/_/g, ' ');
 
                     if (key.toLowerCase() === "overall grade"){
