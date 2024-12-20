@@ -121,7 +121,7 @@ function openChat(ev){
         <span class="close-chat-btn" onclick="closeWindow(event)">x</span>
 
     <div id="inputDiv" class="chat-screen">
-        <h6 id="submitHeader">Submit your solution to ${problemName}: <button id = "toggleHeight">Toggle Height</button></h6>
+        <h6 id="submitHeader">Submit your solution to ${problemName}: <button id = "toggleHeight">Collapse</button></h6>
         <div class="split-view">
             <!-- Left Pane: Input Area -->
             <div class="left-pane">
@@ -170,12 +170,12 @@ function openChat(ev){
 		const right = chatWindow.querySelector('.right-pane');
 		const toggleButton = chatWindow.querySelector('#toggleHeight');
 
-		let isExpanded = false;
+		let isExpanded = true;
 
 		toggleButton.addEventListener('click', () => {
 		    if (isExpanded) {
 		        // Collapse the chat window
-		        chatWindow.style.height = '30vh'; // Collapsed height
+		        chatWindow.style.height = '20vh'; // Collapsed height
 		        isExpanded = false;
 		        toggleButton.textContent = 'Expand';
 		    } else {
