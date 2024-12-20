@@ -182,7 +182,9 @@ function renderDetails(data){
                         `
                     }
                 }
-    html += `<div>
+    html += "<br>";
+    html += "<hr>";
+    html += `<div class="response-block">
             <h3 class="response-field">Your input:</h3>
             <p class="response-field">${data.user_input}</p>
         </div>`
