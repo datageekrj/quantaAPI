@@ -186,6 +186,7 @@ function renderDetails(data){
     html += "<hr>";
     html += `<div class="response-block">
             <h3 class="response-field">Your input:</h3>
+	    <br>
             <p class="response-field">${data.user_input}</p>
         </div>`
     popupDiv.innerHTML = html
