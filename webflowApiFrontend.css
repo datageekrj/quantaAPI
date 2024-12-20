@@ -187,20 +187,19 @@
     margin: 5px;
 }
 
-.sbmt-button-container {
+.sbmt-button {
     border: 3px solid #374b6a;
     border-radius: 6px;
     padding: 2px 6px;
-    display: inline-flex;
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.sbmt-button {
-    width: 15px;
-}
-
-.sbmt-button-container:hover {
+    will-change: transform;
+    transform-origin: center;
+    display: inline-flex; 
+    transition: transform 0.3s ease;
     cursor: pointer;
+    width: 30px;
+}
+
+.sbmt-button:hover {
     transform: scale(1.1);
 }
 
