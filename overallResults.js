@@ -6,7 +6,6 @@ script3.src = "https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js";
 script3.async = true;
 document.head.appendChild(script3);
 document.head.appendChild(script2);
-document.head.appendChild(script1);
 const link = document.createElement("link");
 link.rel = "stylesheet";
 link.href = "https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css";
