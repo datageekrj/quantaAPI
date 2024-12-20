@@ -173,7 +173,7 @@ function renderDetails(data){
 								<p class="response-field">${value}</p>
 						</div>
                         `
-                    } else if (!key.toLowerCase().includes("input") {
+                    } else if (!key.toLowerCase().includes("input")) {
                         html += `
                         <div class="response-block">
 								<h3 class="response-title">${key}:</h3>
