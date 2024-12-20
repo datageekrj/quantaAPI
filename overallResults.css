@@ -144,12 +144,11 @@ p {
 }
 
 .response-block.overall-grade {
-    width: 100%;
+    width: 60%;
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 15px 5px;
-    margin-left: -5px;
 }
 .response-title {
     font-size: 20px;
