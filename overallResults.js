@@ -106,7 +106,7 @@ function showSubmission(event){
             <div class="popup-content">
                     <span class="close-btn" onclick="closePopup()">&times;</span>
                     <div id="popup-body">
-                            <p>Downloading your details, please wait</p>
+                            <p style = "margin: 10px">Downloading your details, please wait</p>
                     </div>
                 </div>
             `
@@ -210,16 +210,29 @@ function renderDetails(data){
 	        `;
 	    }
 	}
-
+	
 	// Add user input block
 	html += "<br>";
 	html += "<hr>";
-	html += `
+
+	if (data.user_input.length > 30){
+		html += `
+	    <div class="response-block long">
+	        <h3 class="response-field">Your input:</h3>
+	        <br>
+	        <p class="response-field">${renderMarkdown(data.user_input)}</p>
+	    </div>
+	`;
+	} else{
+		html += `
 	    <div class="response-block">
 	        <h3 class="response-field">Your input:</h3>
 	        <br>
 	        <p class="response-field">${renderMarkdown(data.user_input)}</p>
 	    </div>
 	`;
+	}
+	
+	
       popupDiv.innerHTML = html;
 }
