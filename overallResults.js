@@ -226,11 +226,5 @@ function renderDetails(data){
 	    <br>
             <p class="response-field">${renderMarkdown(data.user_input)}</p>
         </div>`
-    popupDiv.innerHTML = html
-    try {
-        MathJax.typeset([popupDiv]);
-    }
-    catch (e){
-        console.error(e);
-    }
+    popupDiv.innerHTML = html;
 }
