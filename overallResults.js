@@ -144,18 +144,48 @@ function renderDetails(data){
         console.error("something went wrong");
         return
     }
-    let html = `<div>
+    let html = ``
+                for(let [key, value] of Object.entries(data.response)) {
+                    key = key.replace(/_/g, ' ');
+
+                    if (key.toLowerCase() === "overall grade"){
+                        html += `
+                        <div class="overall-grade-block">
+								<div class="response-block overall-grade">
+										<h3 class="response-title">${key}:</h3>
+										<p class="response-value">${value}</p>
+								</div>
+						</div>
+                        `
+                    } else if (key.toLowerCase()=== "sanity status"){
+						html += `
+                        <div class="response-block">
+								<h3 class="response-title">${key}:</h3>
+								<p class="response-field">${value}</p>
+						</div>
+                        `
+					} 
+					
+					else if (key.toLowerCase().includes("sanity")) {
+                        html += `
+                        <div class="response-block long">
+								<h3 class="response-title">${key}:</h3>
+								<p class="response-field">${value}</p>
+						</div>
+                        `
+                    } else if (!key.toLowerCase().includes("input")) {
+                        html += `
+                        <div class="response-block">
+								<h3 class="response-title">${key}:</h3>
+								<p class="response-field">${value}</p>
+						</div>
+                        `
+                    }
+                }
+    html += `<div>
             <h3 class="response-field">Your input:</h3>
             <p class="response-field">${data.user_input}</p>
         </div>`
-    for(let [key, value] of Object.entries(data.all_response)) {
-        html += `
-        <div>
-            <h3 class="response-field">${key}:</h3>
-            <p class="response-field">${value}</p>
-        </div>
-        `
-    }
     popupDiv.innerHTML = html
     try {
         MathJax.typeset([popupDiv]);
