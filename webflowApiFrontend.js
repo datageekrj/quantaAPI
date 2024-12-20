@@ -116,7 +116,7 @@ function openChat(ev){
         chatWindow = document.createElement("div");
         chatWindow.id = "chatWindow";
         chatWindow.innerHTML = `
-        <span class="close-chat-btn" onclick="closeWindow(event)">x</span>
+        <span class="close-chat-btn" onclick="closeWindow(event)">&times;</span>
 
     <div id="inputDiv" class="chat-screen">
         <h6 id="submitHeader">Submit your solution to ${problemName}: 
