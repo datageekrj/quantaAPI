@@ -195,9 +195,9 @@
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.sbmt-button:hover {
+.sbmt-button-container:hover {
     cursor: pointer;
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 .response-header {
