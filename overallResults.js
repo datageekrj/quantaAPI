@@ -1,13 +1,3 @@
-window.MathJax = {
-    tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        processEscapes: true
-    },
-};
-
-const script1 = document.createElement("script");
-script1.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js";
-script1.async = true;
 const script2 = document.createElement("script");
 script2.src = "https://cdn.jsdelivr.net/npm/marked/marked.min.js";
 script2.async = true;
