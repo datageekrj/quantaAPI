@@ -217,17 +217,15 @@ function renderDetails(data){
 
 	if (data.user_input.length > 30){
 		html += `
-	    <div class="response-block long">
+	    <div class="response-block long input">
 	        <h3 class="response-field">Your input:</h3>
-	        <br>
 	        <p class="response-field">${renderMarkdown(data.user_input)}</p>
 	    </div>
 	`;
 	} else{
 		html += `
-	    <div class="response-block">
+	    <div class="response-block input">
 	        <h3 class="response-field">Your input:</h3>
-	        <br>
 	        <p class="response-field">${renderMarkdown(data.user_input)}</p>
 	    </div>
 	`;
