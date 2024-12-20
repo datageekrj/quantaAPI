@@ -615,10 +615,10 @@ app.post('/getUserSubmissions', async (req, res) => {
         });
 
         submissions.forEach(submission => {
-            const { problem_id, _id, overall_grade } = submission;
+            const { problem_id, _id, overall_grade, all_response } = submission;
             result[problem_id].push({
                 id: _id, // MongoDB's ObjectId
-                overall_grade
+                overall_grade : all_response.Overall_Grade
             });
         });
 
