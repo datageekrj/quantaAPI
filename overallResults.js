@@ -41,6 +41,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         return response.json();
     }).then(data =>{
+        
+        console.log("Here is the full data: ", data);
         let div  = document.querySelector("#delta_user_results");
         div.innerHTML = `
                 <table class="submissions-table">
@@ -58,6 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         let body_html = ``
         for(let [id, results] of Object.entries(data)) {
+            console.log("Object wise:  ", id, results);
             let row_html = ``
             for(let result of results) {
                 row_html += `<a onclick="showSubmission(event)" data-id="${result.id}">${result.overall_grade}</a>`
