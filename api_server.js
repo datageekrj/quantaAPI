@@ -873,7 +873,8 @@ async function start_server(){
        'gpt-4o-2024-08-06',
        'gpt-4o-2024-08-06',
        'gpt-4o-2024-08-06',
-       'gpt-4o-2024-08-06'
+       'gpt-4o-2024-08-06',
+        'gpt-4o-2024-08-06'
    );
 
    app.listen(port, '0.0.0.0', () => {
