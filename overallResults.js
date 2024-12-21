@@ -19,34 +19,38 @@ let submissions = {};
 let user_id = null;
 
 
+
 document.addEventListener('DOMContentLoaded', async () => {
-    let response = await window.$memberstackDom.getCurrentMember();
+    let response = await window.$memberstackDom.getCurrentMember()
 
     if (!response) {
-        return;
+        return
     }
-    user_id = response.data.id;
+    user_id = response.data.id
 
-    //Close popup when clicking outside
     window.addEventListener('click', function(event) {
-        if (popup && event.target !== popup && !popup.contains(event.target)) {
+        if (event.target === popup) {
             popup.style.display = 'none';
         }
     });
 
     fetch(serverLink + 'getUserSubmissions', {
         method: 'POST',
-        body: JSON.stringify({ user_id: user_id }),
-        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+                user_id: user_id,
+            }
+        ),
+        headers: {'Content-Type': 'application/json'},
     }).then(response => {
         if (!response.ok) {
             console.error(`HTTPS error! status: ${response.status}`);
-            return null;
+            return null
         }
         return response.json();
-    }).then(data => {
+    }).then(data =>{
+        
         console.log("Here is the full data: ", data);
-        let div = document.querySelector("#delta_user_results");
+        let div  = document.querySelector("#delta_user_results");
         div.innerHTML = `
                 <table class="submissions-table">
                         <thead>
@@ -58,19 +62,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <tbody id="t-body">
                         </tbody>
                     </table>
-        `;
+        `
         let body = div.querySelector('#t-body');
-        let body_html = ``;
-	//Populate ids array
-	ids = Object.keys(data);
 
-        for (let id of ids) {
-            let results = data[id];
-            let row_html = ``;
-            for (let result of results) {
-                row_html += `<a onclick="showSubmission(event)" data-id="${result.id}">${result.overall_grade}</a>`;
+        let body_html = ``
+        for(let [id, results] of Object.entries(data)) {
+            console.log("Object wise:  ", id, results);
+            let row_html = ``
+            for(let result of results) {
+                row_html += `<a onclick="showSubmission(event)" data-id="${result.id}">${result.overall_grade}</a>`
             }
-            let problemName = id.replace(/_/g, ' ');
+	    if (ids.includes(id)){
+		let problemName = id.replace(/_/g, ' ');
             body_html += `
                         <tr>
                             <td>${problemName}</td>
@@ -81,153 +84,153 @@ document.addEventListener('DOMContentLoaded', async () => {
                             </td>
                         </tr>
             `;
+	    }   
         }
         body.innerHTML = body_html;
 
 
     }).catch(error => {
         console.error(error);
-    });
-});
+    })
+})
 
-function showSubmission(event) {
+function showSubmission(event){
     event.preventDefault();
-    if (popup) {
-        popupDiv.innerHTML = `
-            <div class="popup-content">
-                    <span class="close-btn" onclick="closePopup()">×</span>
-                    <div id="popup-body">
-                            <p>Downloading your details, please wait</p>
-                    </div>
-                </div>
-            `;
-        popup.style.display = 'flex';
-    } else {
+    if(popup){
+        popupDiv.innerHTML = ` <p>Downloading your details, please wait</p>`
+    }
+    else{
         popup = document.createElement("div");
-        popup.classList.add('popup');
+        popup.classList.add('popup')
         popup.innerHTML = `
             <div class="popup-content">
-                    <span class="close-btn" onclick="closePopup()">×</span>
+                    <span class="close-btn" onclick="closePopup()">&times;</span>
                     <div id="popup-body">
-                            <p>Downloading your details, please wait</p>
+                            <p style = "margin: 10px">Downloading your details, please wait</p>
                     </div>
                 </div>
-            `;
-        document.body.appendChild(popup);
-        popupDiv = popup.querySelector("#popup-body");
-        popup.style.display = 'flex';
+            `
+        document.body.append(popup)
+        popupDiv = popup.querySelector("#popup-body")
     }
+    popup.style.display = 'flex';
 
     const id = event.target.getAttribute('data-id');
-    if (submissions[id]) {
-        renderDetails(submissions[id]);
-    } else {
+    if(submissions[id]){
+        renderDetails(submissions[id])
+    }
+    else{
         fetch(serverLink + 'getSubmission', {
             method: 'POST',
-            body: JSON.stringify({ user_id: user_id, submission_id: id }),
-            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                    user_id: user_id,
+                    submission_id: id,
+                }
+            ),
+            headers: {'Content-Type': 'application/json'},
         }).then(response => {
             if (!response.ok) {
                 console.error(`HTTPS error! status: ${response.status}`);
-                return null;
+                return null
             }
             return response.json();
-        }).then(data => {
-            if (!data) return;
-            submissions[id] = data;
-            renderDetails(data);
+        }).then(data =>{
+            if(!data) return
+            submissions[id] = data
+            renderDetails(data)
         }).catch(error => {
             console.error(error);
-        });
+        })
     }
 }
 
-function closePopup(event) {
-    if(popup) popup.style.display = 'none';
+function closePopup(event){
+    popup.style.display = 'none'
 }
 
-function renderMarkdown(input) {
+function renderMarkdown(input){
     let markdown = marked.parse(input);
     markdown = markdown.replace(/\$\$(.+?)\$\$/g, (match, latex) => {
-        try {
-            return katex.renderToString(latex, { displayMode: true, throwOnError: false });
-        } catch (error) {
-            return `<span style="color: red;">${error.message}</span>`;
-        }
-    });
-    markdown = markdown.replace(/\$(.+?)\$/g, (match, latex) => {
-        try {
-            return katex.renderToString(latex, { displayMode: false, throwOnError: false });
-        } catch (error) {
-            return `<span style="color: red;">${error.message}</span>`;
-        }
-    });
-    return markdown;
+                try {
+                    return katex.renderToString(latex, { displayMode: true, throwOnError: false });
+                } catch (error) {
+                    return `<span style="color: red;">${error.message}</span>`;
+                }
+   });
+  markdown = markdown.replace(/\$(.+?)\$/g, (match, latex) => {
+                try {
+                    return katex.renderToString(latex, { displayMode: false, throwOnError: false });
+                } catch (error) {
+                    return `<span style="color: red;">${error.message}</span>`;
+                }
+   });
+   return markdown;
 }
 
-function renderDetails(data) {
-    if (!popup) {
+function renderDetails(data){
+    if(!popup){
         console.error("something went wrong");
-        return;
+        return
     }
-    let html = "";
-    // Ensure "Overall Grade" is handled first
-    if (data.all_response["Overall_Grade"]) {
-        let key = "Overall Grade";
-        let value = data.all_response["Overall_Grade"];
-        html += `
-            <div class="overall-grade-block">
-                <div class="response-block overall-grade">
-                    <h3 class="response-title">${key}:</h3>
-                    <p class="response-value">${value}</p>
-                </div>
-            </div>
-        `;
-    }
+	let html = "";
+	// Ensure "Overall Grade" is handled first
+	if (data.all_response["Overall_Grade"]) {
+	    let key = "Overall Grade";
+	    let value = data.all_response["Overall_Grade"];
+	    html += `
+	        <div class="overall-grade-block">
+	            <div class="response-block overall-grade">
+	                <h3 class="response-title">${key}:</h3>
+	                <p class="response-value">${value}</p>
+	            </div>
+	        </div>
+	    `;
+	}
 
-    // Iterate through other entries
-    for (let [key, value] of Object.entries(data.all_response)) {
-        key = key.replace(/_/g, ' ');
+	// Iterate through other entries
+	for (let [key, value] of Object.entries(data.all_response)) {
+	    key = key.replace(/_/g, ' ');
+	
+	    // Skip "Overall Grade" as it was already handled
+	    if (key.toLowerCase() === "overall grade") continue;
+	
+	    if (value.length > 30) {
+	        html += `
+	            <div class="response-block long">
+	                <h3 class="response-title">${key}:</h3>
+	                <p class="response-field">${value}</p>
+	            </div>
+	        `;
+	    } else if (!key.toLowerCase().includes("input")) {
+	        html += `
+	            <div class="response-block">
+	                <h3 class="response-title">${key}:</h3>
+	                <p class="response-field">${value}</p>
+	            </div>
+	        `;
+	    }
+	}
+	
+	// Add user input block
+	html += "<br>";
+	html += "<hr>";
 
-        // Skip "Overall Grade" as it was already handled
-        if (key.toLowerCase() === "overall grade") continue;
-
-        if (value.length > 30) {
-            html += `
-                <div class="response-block long">
-                    <h3 class="response-title">${key}:</h3>
-                    <p class="response-field">${value}</p>
-                </div>
-            `;
-        } else if (!key.toLowerCase().includes("input")) {
-            html += `
-                <div class="response-block">
-                    <h3 class="response-title">${key}:</h3>
-                    <p class="response-field">${value}</p>
-                </div>
-            `;
-        }
-    }
-
-    // Add user input block
-    html += "<br>";
-    html += "<hr>";
-
-    if (data.user_input.length > 30) {
-        html += `
-            <div class="response-block long">
-                <h3 class="response-title">Your input:</h3>
-                <p class="response-field">${renderMarkdown(data.user_input)}</p>
-            </div>
-        `;
-    } else {
-        html += `
-            <div class="response-block">
-                <h3 class="response-title">Your input:</h3>
-                <p class="response-field">${renderMarkdown(data.user_input)}</p>
-            </div>
-        `;
-    }
-
-    popupDiv.innerHTML = html;
+	if (data.user_input.length > 30){
+		html += `
+	    <div class="response-block long">
+	        <h3 class="response-title">Your input:</h3>
+	        <p class="response-field">${renderMarkdown(data.user_input)}</p>
+	    </div>
+	`;
+	} else{
+		html += `
+	    <div class="response-block">
+	        <h3 class="response-title">Your input:</h3>
+	        <p class="response-field">${renderMarkdown(data.user_input)}</p>
+	    </div>
+	`;
+	}
+	
+	
+      popupDiv.innerHTML = html;
 }
