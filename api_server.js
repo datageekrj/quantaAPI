@@ -411,123 +411,10 @@ class QuantaFTT {
         );
     }
 
-    // async genFullFeedback(problemStatement, correctSolutions, inputSolution,
-    //                       validityOptionalReviewingRequirements, qualityOptionalReviewingRequirements,
-    //                       BEFHintsFreeVersion = true, numReruns = 5) {
-    //     let finalConfidenceLevel = 0.95; // will be adjusted as more checks are conducted
-
-    //     const finalSanityFeedback = await this.genSmartSanityFeedback(
-    //         problemStatement,
-    //         correctSolutions,
-    //         inputSolution,
-    //         numReruns
-    //     );
-
-    //     if (['Fail', 'fail', 'Error', 'error'].includes(finalSanityFeedback.Sanity_Status)) {
-    //         return finalSanityFeedback;
-    //     }
-
-    //     if (finalSanityFeedback.Sanity_Status === 'Pass') {
-    //         const refinedInputSolution = await this.genRefinedSolution(problemStatement, inputSolution);
-
-    //         const prefinalValidityFeedback = await this.genSmartValidityFeedback(
-    //             problemStatement,
-    //             correctSolutions,
-    //             inputSolution,
-    //             refinedInputSolution,
-    //             validityOptionalReviewingRequirements,
-    //             numReruns,
-    //             finalSanityFeedback.Current_Confidence_Level
-    //         );
-
-    //         const prefinalQualityFeedback = await this.genSmartQualityFeedback(
-    //             problemStatement,
-    //             correctSolutions,
-    //             inputSolution,
-    //             qualityOptionalReviewingRequirements,
-    //             numReruns,
-    //             0.95
-    //         );
-
-    //         try {
-    //             const validityGrade = prefinalValidityFeedback.Validity_Grade;
-    //             const qualityGrade = prefinalQualityFeedback.Quality_Grade;
-
-    //             // Change non-confident grade A to grade B
-    //             const percentageStringConfValidity = prefinalValidityFeedback.Confidence_In_Validify_Feedback;
-    //             const percentageStringConfQuality = prefinalQualityFeedback.Confidence_In_Quality_Feedback;
-    //             const percentageIntNumConfValidity = parseInt(percentageStringConfValidity.replace('%', ''));
-    //             const percentageIntNumConfQuality = parseInt(percentageStringConfQuality.replace('%', ''));
-
-    //             if (validityGrade === 'A' && percentageIntNumConfValidity < 75) {
-    //                 prefinalValidityFeedback.Validity_Grade = 'B';
-    //             }
-    //             if (qualityGrade === 'A' && percentageIntNumConfQuality < 75) {
-    //                 prefinalQualityFeedback.Quality_Grade = 'B';
-    //             }
-
-    //             if (validityGrade === 'A' && percentageIntNumConfValidity < 75) {
-    //                 prefinalValidityFeedback.Validity_Grade = 'B';
-    //             }
-    //             if (qualityGrade === 'A' && percentageIntNumConfValidity < 80) {
-    //                 prefinalQualityFeedback.Quality_Grade = 'B';
-    //             }
-
-    //             // If the validity grade is A, then the validity feedback is ready to go
-    //             let finalValidityFeedback;
-    //             if (validityGrade === 'A') {
-    //                 finalValidityFeedback = prefinalValidityFeedback;
-    //             }
-
-    //             // For solutions graded as B/E/F for the validity feedback: clean feedback from hints
-    //             if (BEFHintsFreeVersion) {
-    //                 if (!['A'].includes(validityGrade)) {
-    //                     finalValidityFeedback = {};
-    //                     for (const [key, value] of Object.entries(prefinalValidityFeedback)) {
-    //                         if (!["Answer Status", "Answer_Status", "Validity Grade", "Validity_Grade"].includes(key)) {
-    //                             finalValidityFeedback[key] = await this.genCleanedVersion(value);
-    //                         }
-    //                     }
-    //                     finalValidityFeedback.Validity_Grade = prefinalValidityFeedback.Validity_Grade;
-    //                 }
-    //             } else {
-    //                 finalValidityFeedback = prefinalValidityFeedback;
-    //             }
-
-    //             // Cleaning quality feedback
-    //             const finalQualityFeedback = {};
-    //             for (const [key, value] of Object.entries(prefinalQualityFeedback)) {
-    //                 if (!["Answer Status", "Answer_Status", "Quality Grade", "Quality_Grade"].includes(key)) {
-    //                     finalQualityFeedback[key] = await this.genCleanedVersion(value);
-    //                 }
-    //             }
-    //             finalQualityFeedback.Quality_Grade = prefinalQualityFeedback.Quality_Grade;
-
-    //             // Combining the validity and quality feedback
-    //             const finalFeedback = {
-    //                 ...finalValidityFeedback,
-    //                 ...finalQualityFeedback,
-    //                 Overall_Grade: finalValidityFeedback.Validity_Grade + finalQualityFeedback.Quality_Grade
-    //             };
-
-    //             // Return the processed feedback
-    //             return finalFeedback;
-
-    //         } catch (e) {
-    //             prefinalValidityFeedback.Validity_Grade = '-';
-    //             prefinalQualityFeedback.Quality_Grade = '-';
-    //             const finalFeedback = {
-    //                 ...prefinalValidityFeedback,
-    //                 ...prefinalQualityFeedback,
-    //                 Overall_Grade: '-'
-    //             };
-    //             return finalFeedback;
-    //         }
-    //     }
     async genFullFeedback(problemStatement, correctSolutions, inputSolution,
                           validityOptionalReviewingRequirements, qualityOptionalReviewingRequirements,
                           BEFHintsFreeVersion = true, numReruns = 5) {
-        let finalConfidenceLevel = 0.95;
+        let finalConfidenceLevel = 0.95; // will be adjusted as more checks are conducted
 
         const finalSanityFeedback = await this.genSmartSanityFeedback(
             problemStatement,
@@ -566,31 +453,49 @@ class QuantaFTT {
                 const validityGrade = prefinalValidityFeedback.Validity_Grade;
                 const qualityGrade = prefinalQualityFeedback.Quality_Grade;
 
-                const percentageIntNumConfValidity = parseInt(prefinalValidityFeedback.Confidence_In_Validify_Feedback.replace('%', ''));
-                const percentageIntNumConfQuality = parseInt(prefinalQualityFeedback.Confidence_In_Quality_Feedback.replace('%', ''));
-
+                // Change non-confident grade A to grade B
+                const percentageStringConfValidity = prefinalValidityFeedback.Confidence_In_Validify_Feedback;
+                const percentageStringConfQuality = prefinalQualityFeedback.Confidence_In_Quality_Feedback;
+                const percentageIntNumConfValidity = parseInt(percentageStringConfValidity.replace('%', ''));
+                const percentageIntNumConfQuality = parseInt(percentageStringConfQuality.replace('%', ''));
+                
                 if (validityGrade === 'A' && percentageIntNumConfValidity < 75) {
                     prefinalValidityFeedback.Validity_Grade = 'B';
                 }
                 if (qualityGrade === 'A' && percentageIntNumConfQuality < 75) {
                     prefinalQualityFeedback.Quality_Grade = 'B';
                 }
+                
+                // If you really want a second/further check:
+                if (validityGrade === 'A' && percentageIntNumConfValidity < 75) {
+                    prefinalValidityFeedback.Validity_Grade = 'B';
+                }
+                if (qualityGrade === 'A' && percentageIntNumConfQuality < 80) {
+                    prefinalQualityFeedback.Quality_Grade = 'B';
+                }
 
+                // If the validity grade is A, then the validity feedback is ready to go
                 let finalValidityFeedback;
                 if (validityGrade === 'A') {
                     finalValidityFeedback = prefinalValidityFeedback;
-                } else if (BEFHintsFreeVersion) {
-                    finalValidityFeedback = {};
-                    for (const [key, value] of Object.entries(prefinalValidityFeedback)) {
-                        if (!["Answer Status", "Answer_Status", "Validity Grade", "Validity_Grade"].includes(key)) {
-                            finalValidityFeedback[key] = await this.genCleanedVersion(value);
+                }
+
+                // For solutions graded as B/E/F for the validity feedback: clean feedback from hints
+                if (BEFHintsFreeVersion) {
+                    if (!['A'].includes(validityGrade)) {
+                        finalValidityFeedback = {};
+                        for (const [key, value] of Object.entries(prefinalValidityFeedback)) {
+                            if (!["Answer Status", "Answer_Status", "Validity Grade", "Validity_Grade"].includes(key)) {
+                                finalValidityFeedback[key] = await this.genCleanedVersion(value);
+                            }
                         }
+                        finalValidityFeedback.Validity_Grade = prefinalValidityFeedback.Validity_Grade;
                     }
-                    finalValidityFeedback.Validity_Grade = prefinalValidityFeedback.Validity_Grade;
                 } else {
                     finalValidityFeedback = prefinalValidityFeedback;
                 }
 
+                // Cleaning quality feedback
                 const finalQualityFeedback = {};
                 for (const [key, value] of Object.entries(prefinalQualityFeedback)) {
                     if (!["Answer Status", "Answer_Status", "Quality Grade", "Quality_Grade"].includes(key)) {
@@ -599,22 +504,28 @@ class QuantaFTT {
                 }
                 finalQualityFeedback.Quality_Grade = prefinalQualityFeedback.Quality_Grade;
 
+                // Combining the validity and quality feedback
                 const finalFeedback = {
                     ...finalValidityFeedback,
                     ...finalQualityFeedback,
-                    Overall_Grade: (finalValidityFeedback.Validity_Grade || '-') + (finalQualityFeedback.Quality_Grade || '-')
+                    Overall_Grade: finalValidityFeedback.Validity_Grade + finalQualityFeedback.Quality_Grade
                 };
 
+                // Return the processed feedback
                 return finalFeedback;
 
             } catch (e) {
-                console.error("Error in genFullFeedback:", e); // Log the error for debugging
-                return {
-                    Overall_Grade: '-',
-                    Status: 'An unexpected error occurred. Please try again later.' // More informative error message
+                prefinalValidityFeedback.Validity_Grade = '-';
+                prefinalQualityFeedback.Quality_Grade = '-';
+                const finalFeedback = {
+                    ...prefinalValidityFeedback,
+                    ...prefinalQualityFeedback,
+                    Overall_Grade: '-'
                 };
+                return finalFeedback;
             }
         }
+    
         // If we reached this point, something unexpected happened
         return {
             Overall_Grade: '-',
