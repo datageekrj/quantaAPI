@@ -97,7 +97,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 function showSubmission(event){
     event.preventDefault();
     if(popup){
-        popupDiv.innerHTML = ` <p>Downloading your details, please wait</p>`
+        popupDiv.innerHTML = `
+            <div class="popup-content">
+                    <span class="close-btn" onclick="closePopup()">&times;</span>
+                    <div id="popup-body">
+                            <p>Downloading your details, please wait</p>
+                    </div>
+                </div>
+            `
     }
     else{
         popup = document.createElement("div");
@@ -106,7 +113,7 @@ function showSubmission(event){
             <div class="popup-content">
                     <span class="close-btn" onclick="closePopup()">&times;</span>
                     <div id="popup-body">
-                            <p style = "margin: 10px">Downloading your details, please wait</p>
+                            <p>Downloading your details, please wait</p>
                     </div>
                 </div>
             `
