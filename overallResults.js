@@ -17,7 +17,6 @@ let popup = null;
 let popupDiv = null;
 let submissions = {};
 let user_id = null;
-let ids = []; // Added to store problem IDs
 
 
 document.addEventListener('DOMContentLoaded', async () => {
